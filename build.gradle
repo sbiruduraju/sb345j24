@@ -14,7 +14,16 @@ java {
 }
 
 repositories {
+	mavenLocal()
 	mavenCentral()
+	maven {
+		url = uri("https://repo.spring.io/release")
+	}
+	google()
+	gradlePluginPortal()
+	flatDir {
+		dirs "libs"
+	}
 }
 
 dependencies {
@@ -25,4 +34,9 @@ dependencies {
 
 tasks.named('test') {
 	useJUnitPlatform()
+}
+
+tasks.named('bootBuildImage') {
+	// builder = 'paketobuildpacks/builder:tiny'
+	builder = 'paketobuildpacks/builder:base'
 }
